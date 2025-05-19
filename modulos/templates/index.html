@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Mi primera vista
+{% endblock %}
+
+{% block content %}
+    <h1>Imagen del Sistema Solar!!!</h1>
+    <img class="solar-system" src="{% static 'images/solar-system.png' %}" alt="Sistema Solar">
+{% endblock %}
