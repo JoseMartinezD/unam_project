@@ -8,4 +8,33 @@ Mi primera vista
 {% block content %}
     <h1>Imagen del Sistema Solar!!!</h1>
     <img class="solar-system" src="{% static 'images/solar-system.png' %}" alt="Sistema Solar">
+    <div id="users-container">
+        <ul id="users-list"></ul>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            console.log("Document ready");
+            $.ajax({
+                type: "GET",
+                url: "{% url 'get_users' %}",
+                dataType: "json",
+                data: {},
+                success: function(data) {
+                    console.log(data);
+                    const usersList = $("#users-list");
+                    usersList.empty();
+                    data.forEach(function(user) {
+                        usersList.append("<li>Nombre: " + user.name + " Edad: " + user.age + "</li>");
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error en la petición AJAX:", error);
+                }
+            });
+        });
+    </script>
 {% endblock %}
